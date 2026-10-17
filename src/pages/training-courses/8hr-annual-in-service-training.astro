@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Course8hrAnnualInService from '../../components/Course8hrAnnualInService.astro';
+
+const title = '8 Hour Annual In-Service Training Course for Security Guards';
+const description = '8 Hour Annual In-Service Training Course for Security Guards';
+const message = undefined;
+const error = false;
+---
+<Layout title={title} description={description}>
+<div class="page__wrapper ph3 pv4 mw7 center">
+    {message && (
+        <div class={`messages pa3 ${error ? 'bg-red' : 'bg-green'} white f3 br2 shadow-1`}>
+        <span>{message}</span>
+        </div>
+    )}
+    <h1 class="page__title f2">{title}</h1>
+    <div class="page__bodyWrapper lh-copy">
+        <Course8hrAnnualInService />
+    </div>
+</div>
+</Layout>

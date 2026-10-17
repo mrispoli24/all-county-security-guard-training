@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css?family=EB+Garamond:400,400i,700,700i|Oswald");
+.oswald {
+  font-family: 'Oswald', sans-serif; }
+
+.garamond {
+  font-family: 'EB Garamond', serif; }
+
+.baby-blue {
+  color: rgba(0, 122, 241, 0.15); }
+
+.bg-baby-blue {
+  background-color: rgba(0, 122, 241, 0.15); }
+
+.b--baby-blue {
+  border-color: rgba(0, 122, 241, 0.15); }
+
+.sunrise {
+  color: rgba(248, 159, 103, 0.15); }
+
+.bg-sunrise {
+  background-color: rgba(248, 159, 103, 0.15); }
+
+.b--sunrise {
+  border-color: rgba(248, 159, 103, 0.15); }
+
+.absolute--h-center {
+  left: 50%;
+  transform: translateX(-50%); }
+
+.absolute--v-center {
+  top: 50%;
+  transform: translateY(-50%); }
+
+.absolute--full-center {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%); }
+
+body {
+  font-family: 'EB Garamond', serif; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400; }
+
+.logo {
+  max-width: 300px; }
+
+.navigation {
+  transform: translateX(100%);
+  transition: all 200ms linear; }
+
+.navigation--open {
+  transform: translateX(0%); }
+
+.hero__bannerWrap {
+  background-image: linear-gradient(to bottom right, rgba(0, 122, 241, 0.15), rgba(248, 159, 103, 0.15)), url("../images/header-banner.jpg");
+  background-position: 100% 0%; }
+
+.home__featureBox:hover .home__featureBoxImage {
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.6) inset; }
+
+.home__featureBoxIcon {
+  top: -1.5rem; }
+
+.home__featureBoxImage,
+.home__featureBoxHeadline {
+  transition: all 200ms linear; }
+
+/*# sourceMappingURL=style.css.map */

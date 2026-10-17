@@ -1,0 +1,15 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Ported from the original Express route, which rendered an empty page
+// titled "Express" (placeholder — never linked from the navigation).
+const title = 'Express';
+const description = '';
+---
+<Layout title={title} description={description}>
+<div class="page__wrapper ph3 pv4 mw7 center">
+    <h1 class="page__title f2">{title}</h1>
+    <div class="page__bodyWrapper lh-copy">
+    </div>
+</div>
+</Layout>

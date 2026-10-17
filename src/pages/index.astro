@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const title = 'All County Investigations Security Guard School';
+const description = 'Long Island Security Guard School | Become a New York State Certified Security Guard today, with courses offered in Nassau County for new security guards and existing.';
+import { BASE as base } from '../base';
+---
+<Layout title={title} description={description}>
+<div class="hero__bannerWrap cover">
+    <div class="hero__bannerCopy ph3 pt7 pb6 mw7">
+        <h1 class="f2 f1-ns lh-title">
+            Long Island's Best Security Guard Training and Instruction
+        </h1>
+        <span class="db f3">
+            Become a New York State Certified Security Guard today, with courses offered in Nassau County for new security guards and existing.
+        </span>
+    </div>
+</div>
+<section class="home__featureBoxes flex flex-wrap items-stretch center mb4">
+    <h1 class="home__featureBoxesHeader w-100 ma0 pt5 pb5 f2 tc">Course Offerings</h1>
+    <a class="home__featureBox db relative w-100 w-third-l mw6 center ph3 pb5 link tc black border-box" href={`${base}training-courses/8hr-pre-assignment-training`}>
+        <i class="home__featureBoxIcon absolute absolute--h-center pa3 teal f4 bg-white br-100 fas fa-fingerprint"></i>
+        <div class="home__featureBoxImage aspect-ratio--4x3 bg-center cover" style={`background-image: url('${base}images/8-hr-2.jpg');`}></div>
+        <h2 class="home__featureBoxHeadline mt4 f3">
+            8hr Pre-Assignment Training
+        </h2>
+        <span class="home__featureBoxDescription db ph3 lh-copy">
+            A general introductory course. You must complete this course and submit a copy of the certificate issued to you with your security guard application.
+        </span>
+        <span class="home__featureBoxLearnMore db pt3 b underline lh-copy">Learn More</span>
+    </a>
+     <a class="home__featureBox db relative w-100 w-third-l mw6 center ph3 pb5 link tc black border-box" href={`${base}training-courses/16hr-on-the-job-training`}>
+        <i class="home__featureBoxIcon absolute absolute--h-center pa3 teal f4 bg-white br-100 fas fa-fingerprint"></i>
+        <div class="home__featureBoxImage aspect-ratio--4x3 bg-center cover" style={`background-image: url('${base}images/16-hr-home-image.jpg');`}></div>
+        <h2 class="home__featureBoxHeadline mt4 f3">
+            16hr On-The-Job Training
+        </h2>
+        <span class="home__featureBoxDescription db ph3 lh-copy">
+            A course relevant to the duties of guards, requirements of the work site, and the needs of the employer. You must complete this training within 90 days of employment as a security guard.
+        </span>
+        <span class="home__featureBoxLearnMore db pt3 b underline lh-copy">Learn More</span>
+    </a>
+     <a class="home__featureBox db relative w-100 w-third-l mw6 center ph3 pb5 link tc black border-box" href={`${base}training-courses/8hr-annual-in-service-training`}>
+        <i class="home__featureBoxIcon absolute absolute--h-center pa3 teal f4 bg-white br-100 fas fa-fingerprint"></i>
+        <div class="home__featureBoxImage aspect-ratio--4x3 bg-center cover" style={`background-image: url('${base}images/mall-security.jpg');`}></div>
+        <h2 class="home__featureBoxHeadline mt4 f3">
+            8hr Annual In-Service Training
+        </h2>
+        <span class="home__featureBoxDescription db ph3 lh-copy">
+            This course must be completed each calendar year you hold a security guard registration. Your registration is issued for two years, therefore, you must complete two 8 Hour Annual In-Service training courses within your registration effective and expiration dates to be eligible for renewal.
+        </span>
+        <span class="home__featureBoxLearnMore db pt3 b underline lh-copy">Learn More</span>
+    </a>
+</section>
+<section class="home__aboutSection flex flex-wrap items-stretch center bg-baby-blue">
+    <div class="home__aboutImage w-100 w-50-l pv7 bg-center cover" style={`background-image: url('${base}images/8-hr-1.jpg');`}>
+    </div>
+    <div class="home__aboutSectionCopy w-100 w-50-l ph3 pv4 mw6 center">
+        <h1 class="home__aboutSectionHeader w-100 ma0 pv4 f2">About Your Instructor</h1>
+        <p class="lh-copy">Your director/instructor has over thirty years of law enforcement experience. He was member of the New York City Police Department and Nassau County, NY Police Department and is retired as a detective from the Nassau County Police Department Major Case Bureau. He is a Certified Fraud Examiner and a Certified Financial Crime Investigator. </p>
+        <a class="db black b" href={`${base}about-your-instructor`}>Read More</a>
+    </div>
+</section>
+<section class="home__aboutSection flex flex-row-reverse flex-wrap items-stretch center bg-sunrise">
+    <div class="home__aboutImage w-100 w-50-l pv7 bg-center cover" style={`background-image: url('${base}images/security-guard-female.jpg');`}>
+    </div>
+    <div class="home__aboutSectionCopy w-100 w-50-l ph3 pv4 mw6 center">
+        <h1 class="home__aboutSectionHeader w-100 ma0 pv4 f2">Becoming a Security Guard</h1>
+        <p class="lh-copy">All security guards are required to complete an 8 Hour Pre-Assignment Training Course prior to applying to the Department of State for a Security Guard Registration Card. That course must be followed by a 16-Hour On-the-Job Training Course for Security Guards within 90 days of initial employment as a security guard. Guards also must complete an 8-Hour Annual In-service Training Course for Security Guards every year.</p>
+        <a class="db black b" href={`${base}becoming-a-security-guard`}>Read More</a>
+    </div>
+</section>
+</Layout>

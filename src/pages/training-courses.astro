@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TrainingCourses from '../components/TrainingCourses.astro';
+
+const title = 'Security Guard Training Courses';
+const description = 'All County Investigations | Training Courses for security guards on Long Island';
+const message = undefined;
+const error = false;
+---
+<Layout title={title} description={description}>
+<div class="page__wrapper ph3 pv4 mw7 center">
+    {message && (
+        <div class={`messages pa3 ${error ? 'bg-red' : 'bg-green'} white f3 br2 shadow-1`}>
+        <span>{message}</span>
+        </div>
+    )}
+    <h1 class="page__title f2">{title}</h1>
+    <div class="page__bodyWrapper lh-copy">
+        <TrainingCourses />
+    </div>
+</div>
+</Layout>

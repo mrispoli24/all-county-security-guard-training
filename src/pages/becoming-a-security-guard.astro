@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BecomingASecurityGuard from '../components/BecomingASecurityGuard.astro';
+
+const title = 'Becoming a Security Guard';
+const description = 'All County Investigations | The following courses are the only ones required to become a security guard in New York State. All security guards are required to complete an 8 Hour Pre-Assignment Training Course prior to applying to the Department of State for a Security Guard Registration Card.';
+const message = undefined;
+const error = false;
+---
+<Layout title={title} description={description}>
+<div class="page__wrapper ph3 pv4 mw7 center">
+    {message && (
+        <div class={`messages pa3 ${error ? 'bg-red' : 'bg-green'} white f3 br2 shadow-1`}>
+        <span>{message}</span>
+        </div>
+    )}
+    <h1 class="page__title f2">{title}</h1>
+    <div class="page__bodyWrapper lh-copy">
+        <BecomingASecurityGuard />
+    </div>
+</div>
+</Layout>

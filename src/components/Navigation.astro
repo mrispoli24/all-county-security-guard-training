@@ -1,0 +1,25 @@
+---
+import { BASE as base } from '../base';
+---
+<nav class="navigation w-90 mw6 fixed top-0 bottom-0 right-0 white bg-near-black z-9999">
+    <span class="navigation__navCloseTrigger absolute top-1 right-2 pointer"><i class="fas fa-angle-right f3"></i></span>
+    <ul class="list pv4 h-100 white overflow-y-scroll">
+        <li><a class="db pv2 f3 white link" href={base}>Home</a></li>
+        <li><a class="db pv2 f3 white link" href={`${base}about-your-instructor`}>About Your Instructor</a></li>
+        <li><a class="db pv2 f3 white link" href={`${base}training-courses`}>Training Courses</a></li>
+        <li><a class="db pv2 f3 white link" href={`${base}becoming-a-security-guard`}>Becoming A Security Guard</a></li>
+        <li><a class="db pv2 f3 white link" href={`${base}faq`}>FAQ</a></li>
+        <li class="pt4 pb3 f3">Follow Us</li>
+        <li>
+            <a class="dib pv2 pr2 f3 white link" href="https://www.facebook.com/All-County-Security-Guard-Training-417202011668011/" target="_blank">
+                <i class="fab fa-facebook f3"></i>
+            </a>
+            <a class="dib pv2 ph2 f3 white link" href="https://twitter.com/county_guard" target="_blank">
+                <i class="fab fa-twitter f3"></i>
+            </a>
+            {/* <a class="dib pv2 ph2 f3 white link" href="#" target="_blank">
+                <i class="fab fa-linkedin f3"></i>
+            </a> */}
+        </li>
+    </ul>
+</nav>
