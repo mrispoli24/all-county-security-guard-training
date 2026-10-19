@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
+import vercel from '@astrojs/vercel';
 
-// Static site deployed to GitHub Pages.
-// Preview URL: https://mrispoli24.github.io/all-county-security-guard-training
-// When the custom domain (allcountysecurityguardtraining.com) is pointed at
-// GitHub Pages via GoDaddy, change base to '/'.
+// Deployed to Vercel (project: aci-security-guard-training).
+// SSR enabled so /api/* routes and /admin work server-side.
+// The GitHub Pages static build remains untouched in git history.
 export default defineConfig({
-  site: 'https://mrispoli24.github.io',
-  base: '/all-county-security-guard-training',
+  output: 'server',
+  adapter: vercel(),
+  site: 'https://aci-security-guard-training.vercel.app',
 });

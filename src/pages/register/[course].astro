@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCourse } from '../../lib/courses';
+
+export const prerender = false;
+
+const { course: slug } = Astro.params;
+const course = getCourse(slug ?? '');
+
+if (!course) {
+  return Astro.redirect('/training-courses');
+}
+
+const title = `Register — ${course.name}`;
+const description = `Register for ${course.name} (${course.price}) at All County Security Guard Training.`;
+---
+<Layout title={title} description={description}>
+<div class="page__wrapper ph3 pv4 mw7 center">
+  <h1 class="page__title f2">{course.name}</h1>
+  <p class="f4"><strong>Price:</strong> {course.price} &nbsp;·&nbsp; <strong>Time:</strong> {course.time}</p>
+  <p class="f5 i">Payment is required prior to start of online classes. After submitting this form you will be taken to secure checkout to pay.</p>
+
+  <div id="form-error" class="dn pa3 mb3 bg-light-red dark-red br2"></div>
+
+  <form id="registration-form" class="measure-wide">
+    <h2 class="f3 oswald">Full Name *</h2>
+    <div class="flex flex-wrap nl2 nr2">
+      <div class="w-50-ns w-100 ph2 mb3">
+        <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="first_name" required autocomplete="given-name" />
+        <small class="f6 db mt1 gray">First Name</small>
+      </div>
+      <div class="w-50-ns w-100 ph2 mb3">
+        <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="last_name" required autocomplete="family-name" />
+        <small class="f6 db mt1 gray">Last Name</small>
+      </div>
+    </div>
+
+    <h2 class="f3 oswald">Address *</h2>
+    <div class="mb3">
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="street_address" required autocomplete="street-address" />
+      <small class="f6 db mt1 gray">Street Address</small>
+    </div>
+    <div class="mb3">
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="street_address_2" autocomplete="address-line2" />
+      <small class="f6 db mt1 gray">Street Address Line 2</small>
+    </div>
+    <div class="flex flex-wrap nl2 nr2">
+      <div class="w-50-ns w-100 ph2 mb3">
+        <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="city" required autocomplete="address-level2" />
+        <small class="f6 db mt1 gray">City</small>
+      </div>
+      <div class="w-50-ns w-100 ph2 mb3">
+        <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="state" required autocomplete="address-level1" />
+        <small class="f6 db mt1 gray">State / Province</small>
+      </div>
+    </div>
+    <div class="mb3 w-50-ns">
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="text" name="zip" required autocomplete="postal-code" />
+      <small class="f6 db mt1 gray">Postal / Zip Code</small>
+    </div>
+
+    <h2 class="f3 oswald">E-mail *</h2>
+    <div class="mb3">
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="email" name="email" required placeholder="ex: myname@example.com" autocomplete="email" />
+    </div>
+
+    <h2 class="f3 oswald">Phone Number *</h2>
+    <div class="flex flex-wrap nl2 nr2">
+      <div class="w-30 ph2 mb3">
+        <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="tel" name="phone_area_code" required pattern="[0-9]{3}" maxlength="3" autocomplete="tel-area-code" />
+        <small class="f6 db mt1 gray">Area Code</small>
+      </div>
+      <div class="w-70 ph2 mb3">
+        <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="tel" name="phone_number" required autocomplete="tel-local" />
+        <small class="f6 db mt1 gray">Phone Number</small>
+      </div>
+    </div>
+
+    <h2 class="f3 oswald">Date of Birth *</h2>
+    <div class="mb3 w-50-ns">
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="date" name="date_of_birth" required autocomplete="bday" />
+    </div>
+
+    <h2 class="f3 oswald">Last 4 of SSN *</h2>
+    <div class="mb3 w-50-ns">
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="password" name="last4_ssn" required pattern="[0-9]{4}" maxlength="4" inputmode="numeric" autocomplete="off" />
+    </div>
+
+    <h2 class="f3 oswald">Course Date *</h2>
+    <div class="mb3 w-50-ns">
+      <select class="input-reset ba b--black-20 pa2 db w-100 br2 bg-white" name="course_date" required>
+        <option value="">Pick Date</option>
+      </select>
+      <small class="f6 db mt1 gray">Available class dates are listed after you choose below — or pick any upcoming date and we will confirm.</small>
+    </div>
+
+    <h2 class="f3 oswald">Time *</h2>
+    <div class="mb3 w-50-ns">
+      <select class="input-reset ba b--black-20 pa2 db w-100 br2 bg-white" name="course_time" required>
+        <option value="">Pick Time</option>
+        <option value="9:00am - 5:00pm">9:00am - 5:00pm</option>
+      </select>
+    </div>
+
+    <h2 class="f3 oswald">Do you need any special accommodations?</h2>
+    <div class="mb3">
+      <label class="db mb2"><input type="radio" name="accommodations" value="no" checked class="mr2" /> NO — I do not need any special accommodations</label>
+      <label class="db"><input type="radio" name="accommodations" value="yes" class="mr2" /> YES — Please specify in comments below</label>
+    </div>
+
+    <h2 class="f3 oswald">Comments</h2>
+    <div class="mb4">
+      <textarea class="input-reset ba b--black-20 pa2 db w-100 br2" name="comments" rows="5"></textarea>
+    </div>
+
+    <button type="submit" id="submit-btn" class="dib mv3 pv3 ph4 f4 b link white bg-dark-blue br2 bn pointer dim">
+      Continue to Payment — {course.price}
+    </button>
+  </form>
+</div>
+
+<script define:vars={{ courseSlug: course.slug }}>
+  // Populate course dates with the next 12 Saturdays (typical class days).
+  (function () {
+    var select = document.querySelector('select[name="course_date"]');
+    var d = new Date();
+    var added = 0;
+    while (added < 12) {
+      d.setDate(d.getDate() + 1);
+      if (d.getDay() === 6) {
+        var opt = document.createElement('option');
+        var iso = d.toISOString().slice(0, 10);
+        opt.value = iso;
+        opt.textContent = d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        select.appendChild(opt);
+        added++;
+      }
+    }
+
+    var form = document.getElementById('registration-form');
+    var errBox = document.getElementById('form-error');
+    var btn = document.getElementById('submit-btn');
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      errBox.classList.add('dn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      var data = {};
+      new FormData(form).forEach(function (v, k) { data[k] = String(v); });
+      data.course_slug = courseSlug;
+      try {
+        var res = await fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        var json = await res.json();
+        if (!res.ok) throw new Error(json.error || 'Submission failed');
+        window.location.href = json.paymentLink;
+      } catch (err) {
+        errBox.textContent = err.message || 'Something went wrong. Please try again.';
+        errBox.classList.remove('dn');
+        btn.disabled = false;
+        btn.textContent = 'Continue to Payment';
+        window.scrollTo(0, 0);
+      }
+    });
+  })();
+</script>
+</Layout>

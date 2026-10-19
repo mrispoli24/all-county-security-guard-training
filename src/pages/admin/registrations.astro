@@ -1,0 +1,88 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { isAdmin } from '../../lib/admin-auth';
+import { getDb, REGISTRATIONS_SCHEMA } from '../../lib/turso';
+import { COURSES } from '../../lib/courses';
+
+export const prerender = false;
+
+if (!isAdmin(Astro.cookies)) {
+  return Astro.redirect('/admin');
+}
+
+const filter = Astro.url.searchParams.get('course') || '';
+
+let rows: Record<string, any>[] = [];
+let dbError = '';
+try {
+  const db = getDb();
+  await db.execute(REGISTRATIONS_SCHEMA);
+  const result = filter
+    ? await db.execute({ sql: 'SELECT * FROM registrations WHERE course_slug = ? ORDER BY created_at DESC', args: [filter] })
+    : await db.execute('SELECT * FROM registrations ORDER BY created_at DESC');
+  rows = result.rows as Record<string, any>[];
+} catch (e) {
+  dbError = 'Could not load registrations. Check the database configuration.';
+}
+---
+<Layout title="Registrations — Admin">
+<div class="page__wrapper ph3 pv4 mw9 center">
+  <h1 class="page__title f2 oswald">Course Registrations</h1>
+
+  <form method="GET" class="mb4">
+    <label class="fw6 mr2" for="course">Filter by course:</label>
+    <select id="course" name="course" class="input-reset ba b--black-20 pa2 br2 bg-white" onchange="this.form.submit()">
+      <option value="">All courses</option>
+      {Object.values(COURSES).map((c) => (
+        <option value={c.slug} selected={filter === c.slug}>{c.name} ({c.price})</option>
+      ))}
+    </select>
+    <span class="ml3 f6 gray">{rows.length} registration{rows.length === 1 ? '' : 's'}</span>
+  </form>
+
+  {dbError && <div class="pa3 mb3 bg-light-red dark-red br2">{dbError}</div>}
+
+  {rows.length === 0 && !dbError && <p class="f4 i gray">No registrations yet.</p>}
+
+  {rows.length > 0 && (
+    <div class="overflow-auto">
+      <table class="collapse ba b--black-10 w-100 f6">
+        <thead>
+          <tr class="bg-near-white tl">
+            <th class="pa2 ba b--black-10">Date</th>
+            <th class="pa2 ba b--black-10">Course</th>
+            <th class="pa2 ba b--black-10">Name</th>
+            <th class="pa2 ba b--black-10">Email</th>
+            <th class="pa2 ba b--black-10">Phone</th>
+            <th class="pa2 ba b--black-10">Address</th>
+            <th class="pa2 ba b--black-10">DOB</th>
+            <th class="pa2 ba b--black-10">Last 4 SSN</th>
+            <th class="pa2 ba b--black-10">Class Date</th>
+            <th class="pa2 ba b--black-10">Time</th>
+            <th class="pa2 ba b--black-10">Accommodations</th>
+            <th class="pa2 ba b--black-10">Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr class="striped--near-white">
+              <td class="pa2 ba b--black-10">{String(r.created_at).slice(0, 16).replace('T', ' ')}</td>
+              <td class="pa2 ba b--black-10">{r.course_name}</td>
+              <td class="pa2 ba b--black-10">{r.first_name} {r.last_name}</td>
+              <td class="pa2 ba b--black-10">{r.email}</td>
+              <td class="pa2 ba b--black-10">({r.phone_area_code}) {r.phone_number}</td>
+              <td class="pa2 ba b--black-10">{r.street_address}{r.street_address_2 ? `, ${r.street_address_2}` : ''}, {r.city}, {r.state} {r.zip}</td>
+              <td class="pa2 ba b--black-10">{r.date_of_birth}</td>
+              <td class="pa2 ba b--black-10">***-{r.last4_ssn}</td>
+              <td class="pa2 ba b--black-10">{r.course_date}</td>
+              <td class="pa2 ba b--black-10">{r.course_time}</td>
+              <td class="pa2 ba b--black-10">{r.accommodations === 'yes' ? 'YES — see comments' : 'No'}</td>
+              <td class="pa2 ba b--black-10">{r.comments}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</div>
+</Layout>

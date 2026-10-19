@@ -1,0 +1,20 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+export const prerender = false;
+
+const error = Astro.url.searchParams.get('error');
+---
+<Layout title="Admin Login — All County Security Guard Training">
+<div class="page__wrapper ph3 pv4 mw6 center">
+  <h1 class="page__title f2 oswald">Admin Login</h1>
+  {error && <div class="pa3 mb3 bg-light-red dark-red br2">Incorrect password. Please try again.</div>}
+  <form method="POST" action="/api/admin-login" class="measure">
+    <div class="mb3">
+      <label class="db fw6 mb2" for="password">Password</label>
+      <input class="input-reset ba b--black-20 pa2 db w-100 br2" type="password" id="password" name="password" required autocomplete="current-password" />
+    </div>
+    <button type="submit" class="dib pv2 ph4 f5 b link white bg-dark-blue br2 bn pointer dim">Log In</button>
+  </form>
+</div>
+</Layout>

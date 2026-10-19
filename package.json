@@ -1,1 +1,1 @@
-{"dependencies":{"astro":"^5.0.0"},"name":"aci-security-guard-training","private":true,"scripts":{"build":"astro build","dev":"astro dev","preview":"astro preview"},"type":"module","version":"0.0.0"}
+{"dependencies":{"@astrojs/vercel":"^8.2.11","@libsql/client":"^0.18.0","astro":"^5.0.0"},"name":"aci-security-guard-training","private":true,"scripts":{"build":"astro build","dev":"astro dev","preview":"astro preview"},"type":"module","version":"0.0.0"}
