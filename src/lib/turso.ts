@@ -37,4 +37,5 @@ CREATE TABLE IF NOT EXISTS registrations (
   accommodations TEXT NOT NULL,
   comments TEXT,
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
 `;
