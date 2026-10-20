@@ -60,7 +60,10 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (e) {
     console.error('Registration save failed');
-    return new Response(JSON.stringify({ error: 'Could not save registration. Please try again.' }), { status: 500 });
+    // Temporary diagnostic response; restore a generic error after diagnosis.
+    return new Response(JSON.stringify({
+      error: 'DB_ERROR: ' + (e instanceof Error ? e.message : String(e)),
+    }), { status: 500, headers: { 'Content-Type': 'application/json' } });
   }
 
   return new Response(JSON.stringify({ paymentLink: course.paymentLink }), {

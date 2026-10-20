@@ -67,3 +67,19 @@ test('invalid input does not write a registration', async () => {
   const rows = await getDb().execute('SELECT COUNT(*) AS count FROM registrations');
   assert.equal(rows.rows[0].count, 0);
 });
+
+test('temporary debug response includes database errors and non-Error throws', async (t) => {
+  for (const thrown of [new Error('Synthetic connection failure'), 'Synthetic token failure']) {
+    const execute = t.mock.method(getDb(), 'execute', async () => { throw thrown; });
+    try {
+      const response = await post(registration);
+      assert.equal(response.status, 500);
+      assert.equal(response.headers.get('Content-Type'), 'application/json');
+      assert.deepEqual(await response.json(), {
+        error: 'DB_ERROR: ' + (thrown instanceof Error ? thrown.message : String(thrown)),
+      });
+    } finally {
+      execute.mock.restore();
+    }
+  }
+});
