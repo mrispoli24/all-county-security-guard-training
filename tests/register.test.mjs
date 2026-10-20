@@ -68,7 +68,7 @@ test('invalid input does not write a registration', async () => {
   assert.equal(rows.rows[0].count, 0);
 });
 
-test('temporary debug response includes database errors and non-Error throws', async (t) => {
+test('database errors and non-Error throws return a generic response without leaking details', async (t) => {
   for (const thrown of [new Error('Synthetic connection failure'), 'Synthetic token failure']) {
     const execute = t.mock.method(getDb(), 'execute', async () => { throw thrown; });
     try {
@@ -76,7 +76,7 @@ test('temporary debug response includes database errors and non-Error throws', a
       assert.equal(response.status, 500);
       assert.equal(response.headers.get('Content-Type'), 'application/json');
       assert.deepEqual(await response.json(), {
-        error: 'DB_ERROR: ' + (thrown instanceof Error ? thrown.message : String(thrown)),
+        error: 'Could not save registration. Please try again.',
       });
     } finally {
       execute.mock.restore();
