@@ -9,8 +9,8 @@ export interface Course {
   price: string;
   priceCents: number;
   stripeProductId: string;
-  // TODO: Replace with real Stripe Payment Links from dad's Stripe dashboard
-  // (Stripe Dashboard → Payments → Payment Links, one per product).
+  // Real Stripe Payment Links from dad's Stripe dashboard (verified live
+  // 2026-10-21: each link's checkout page shows the matching course + price).
   paymentLink: string;
   time: string;
 }
@@ -22,7 +22,7 @@ export const COURSES: Record<string, Course> = {
     price: '$60.00',
     priceCents: 6000,
     stripeProductId: 'prod_VTHRTcIFHJH9bZ',
-    paymentLink: 'https://buy.stripe.com/REPLACE-PRE-ASSIGNMENT',
+    paymentLink: 'https://buy.stripe.com/28E9ASdpQdZ64vme625EY02',
     time: '9:00am - 5:00pm',
   },
   'on-the-job': {
@@ -31,7 +31,7 @@ export const COURSES: Record<string, Course> = {
     price: '$120.00',
     priceCents: 12000,
     stripeProductId: 'prod_VTHRgWrTTM7luO',
-    paymentLink: 'https://buy.stripe.com/REPLACE-ON-THE-JOB',
+    paymentLink: 'https://buy.stripe.com/bJe8wOadE3ks3ri0fc5EY01',
     time: '9:00am - 5:00pm',
   },
   'annual-in-service': {
@@ -40,7 +40,7 @@ export const COURSES: Record<string, Course> = {
     price: '$50.00',
     priceCents: 5000,
     stripeProductId: 'prod_VTHQfhv6T3pn15',
-    paymentLink: 'https://buy.stripe.com/REPLACE-ANNUAL-IN-SERVICE',
+    paymentLink: 'https://buy.stripe.com/dRm5kC5Xo4ow3ri0fc5EY00',
     time: '9:00am - 5:00pm',
   },
 };
