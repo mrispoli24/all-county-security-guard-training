@@ -23,7 +23,7 @@ export const COURSES: Record<string, Course> = {
     price: '$80.00',
     priceCents: 8000,
     stripeProductId: 'prod_VTHRTcIFHJH9bZ',
-    paymentLink: 'https://buy.stripe.com/28E9ASdpQdZ64vme625EY02',
+    paymentLink: 'https://buy.stripe.com/00w4gybhI08g7Hye625EY05',
     date: 'November 28 and 29, 2026',
     time: '9am to 1pm each day',
   },
@@ -33,7 +33,7 @@ export const COURSES: Record<string, Course> = {
     price: '$160.00',
     priceCents: 16000,
     stripeProductId: 'prod_VTHRgWrTTM7luO',
-    paymentLink: 'https://buy.stripe.com/bJe8wOadE3ks3ri0fc5EY01',
+    paymentLink: 'https://buy.stripe.com/aFa4gy2LcdZ62ne3ro5EY04',
     time: '9:00am - 5:00pm',
   },
   'annual-in-service': {
@@ -42,7 +42,7 @@ export const COURSES: Record<string, Course> = {
     price: '$80.00',
     priceCents: 8000,
     stripeProductId: 'prod_VTHQfhv6T3pn15',
-    paymentLink: 'https://buy.stripe.com/dRm5kC5Xo4ow3ri0fc5EY00',
+    paymentLink: 'https://buy.stripe.com/aFa00iclM8EM2ne6DA5EY03',
     time: '9:00am - 5:00pm',
   },
 };
