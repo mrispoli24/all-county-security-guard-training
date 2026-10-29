@@ -12,6 +12,7 @@ export interface Course {
   // Real Stripe Payment Links from dad's Stripe dashboard (verified live
   // 2026-10-21: each link's checkout page shows the matching course + price).
   paymentLink: string;
+  date?: string;
   time: string;
 }
 
@@ -19,17 +20,18 @@ export const COURSES: Record<string, Course> = {
   'pre-assignment': {
     slug: 'pre-assignment',
     name: '8 Hour Pre-Assignment Training',
-    price: '$60.00',
-    priceCents: 6000,
+    price: '$80.00',
+    priceCents: 8000,
     stripeProductId: 'prod_VTHRTcIFHJH9bZ',
     paymentLink: 'https://buy.stripe.com/28E9ASdpQdZ64vme625EY02',
-    time: '9:00am - 5:00pm',
+    date: 'November 28 and 29, 2026',
+    time: '9am to 1pm each day',
   },
   'on-the-job': {
     slug: 'on-the-job',
     name: '16 Hour On-the-Job Training',
-    price: '$120.00',
-    priceCents: 12000,
+    price: '$160.00',
+    priceCents: 16000,
     stripeProductId: 'prod_VTHRgWrTTM7luO',
     paymentLink: 'https://buy.stripe.com/bJe8wOadE3ks3ri0fc5EY01',
     time: '9:00am - 5:00pm',
@@ -37,8 +39,8 @@ export const COURSES: Record<string, Course> = {
   'annual-in-service': {
     slug: 'annual-in-service',
     name: '8 Hour Annual In-Service Training',
-    price: '$50.00',
-    priceCents: 5000,
+    price: '$80.00',
+    priceCents: 8000,
     stripeProductId: 'prod_VTHQfhv6T3pn15',
     paymentLink: 'https://buy.stripe.com/dRm5kC5Xo4ow3ri0fc5EY00',
     time: '9:00am - 5:00pm',

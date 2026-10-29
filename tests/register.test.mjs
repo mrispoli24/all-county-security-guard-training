@@ -10,6 +10,7 @@ const vite = await createServer({
   server: { middlewareMode: true },
 });
 const { POST } = await vite.ssrLoadModule('/src/pages/api/register.ts');
+const { COURSES } = await vite.ssrLoadModule('/src/lib/courses.ts');
 const { getDb, REGISTRATIONS_SCHEMA } = await vite.ssrLoadModule('/src/lib/turso.ts');
 after(async () => {
   getDb().close();
@@ -27,6 +28,17 @@ const post = (body) => POST({ request: new Request('http://localhost/api/registe
   method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body),
 }) });
 
+test('course content reflects the October 29 pricing and November class announcement', () => {
+  assert.equal(COURSES['pre-assignment'].price, '$80.00');
+  assert.equal(COURSES['pre-assignment'].priceCents, 8000);
+  assert.equal(COURSES['annual-in-service'].price, '$80.00');
+  assert.equal(COURSES['annual-in-service'].priceCents, 8000);
+  assert.equal(COURSES['on-the-job'].price, '$160.00');
+  assert.equal(COURSES['on-the-job'].priceCents, 16000);
+  assert.equal(COURSES['pre-assignment'].date, 'November 28 and 29, 2026');
+  assert.equal(COURSES['pre-assignment'].time, '9am to 1pm each day');
+});
+
 test('registration schema is valid SQL and is idempotent', async () => {
   await getDb().execute(REGISTRATIONS_SCHEMA);
   await getDb().execute(REGISTRATIONS_SCHEMA);
@@ -39,7 +51,7 @@ test('fresh database: save a registration, return payment link, and clean up', a
     const response = await post(registration);
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), {
-      paymentLink: 'https://buy.stripe.com/REPLACE-PRE-ASSIGNMENT',
+      paymentLink: COURSES['pre-assignment'].paymentLink,
     });
     const saved = await db.execute({
       sql: 'SELECT first_name, course_slug FROM registrations WHERE email = ?',

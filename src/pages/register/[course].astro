@@ -18,6 +18,7 @@ const description = `Register for ${course.name} (${course.price}) at All County
 <div class="page__wrapper ph3 pv4 mw7 center">
   <h1 class="page__title f2">{course.name}</h1>
   <p class="f4"><strong>Price:</strong> {course.price} &nbsp;·&nbsp; <strong>Time:</strong> {course.time}</p>
+  {course.date && <p class="f4"><strong>Date:</strong> {course.date}</p>}
   <p class="f5 i">Payment is required prior to start of online classes. After submitting this form you will be taken to secure checkout to pay.</p>
 
   <div id="form-error" class="dn pa3 mb3 bg-light-red dark-red br2"></div>
@@ -90,15 +91,16 @@ const description = `Register for ${course.name} (${course.price}) at All County
     <div class="mb3 w-50-ns">
       <select class="input-reset ba b--black-20 pa2 db w-100 br2 bg-white" name="course_date" required>
         <option value="">Pick Date</option>
+        {course.date && <option value="2026-11-28">{course.date} (both days)</option>}
       </select>
-      <small class="f6 db mt1 gray">Available class dates are listed after you choose below — or pick any upcoming date and we will confirm.</small>
+      <small class="f6 db mt1 gray">{course.date ? 'This course meets on both days listed above.' : 'Available class dates are listed after you choose below — or pick any upcoming date and we will confirm.'}</small>
     </div>
 
     <h2 class="f3 oswald">Time *</h2>
     <div class="mb3 w-50-ns">
       <select class="input-reset ba b--black-20 pa2 db w-100 br2 bg-white" name="course_time" required>
         <option value="">Pick Time</option>
-        <option value="9:00am - 5:00pm">9:00am - 5:00pm</option>
+        <option value={course.time}>{course.time}</option>
       </select>
     </div>
 
@@ -119,13 +121,13 @@ const description = `Register for ${course.name} (${course.price}) at All County
   </form>
 </div>
 
-<script define:vars={{ courseSlug: course.slug }}>
-  // Populate course dates with the next 12 Saturdays (typical class days).
+<script define:vars={{ courseSlug: course.slug, hasScheduledClass: Boolean(course.date) }}>
+  // Keep the existing date choices for courses without an announced class.
   (function () {
     var select = document.querySelector('select[name="course_date"]');
     var d = new Date();
     var added = 0;
-    while (added < 12) {
+    while (!hasScheduledClass && added < 12) {
       d.setDate(d.getDate() + 1);
       if (d.getDay() === 6) {
         var opt = document.createElement('option');
